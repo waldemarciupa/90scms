@@ -46,6 +46,17 @@
                                 <input class="btn btn-primary" type="submit" name="submit" value="Add Category">
                             </div>
                         </form>
+
+                        <?php
+
+                        if (isset($_GET['edit'])) {
+                            $cat_id = $_GET['edit'];
+
+                            include "includes/update_categories.php";
+                        }
+
+                        ?>
+
                     </div>
                     <div class="col-xs-6">
                         <table class="table  table-hover">
@@ -56,6 +67,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+
                                 <?php
                                 $query = "SELECT * FROM categories";
                                 $select_catagories = mysqli_query($connection, $query);
@@ -68,6 +80,7 @@
                                     <td>$cat_id</td>
                                     <td>$cat_title</td>
                                     <td><a href='categories.php?delete=$cat_id'>Delete</a></td>
+                                    <td><a href='categories.php?edit=$cat_id'>Edit</a></td>
                                 </tr>";
                                 }
                                 ?>
