@@ -66,3 +66,18 @@ function delete_category()
         header("Location: categories.php");
     }
 }
+
+function delete_post()
+{
+    global $connection;
+
+    if (isset($_GET['delete'])) {
+        $post_id_delete = $_GET['delete'];
+
+        $query = "DELETE FROM posts WHERE post_id = $post_id_delete ";
+
+        $delete_query = mysqli_query($connection, $query);
+
+        header("Location: posts.php");
+    }
+}

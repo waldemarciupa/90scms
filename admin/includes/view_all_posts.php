@@ -40,6 +40,8 @@
                                         <td>$post_tags</td>
                                         <td>$post_comment_count</td>
                                         <td>$post_date</td>
+                                        <td><a href='posts.php?source=edit_post'>Edit</a></td>
+                                        <td><a href='posts.php?delete=$post_id'>Delete</a></td>
                                     </tr>";
         }
 
@@ -47,3 +49,6 @@
 
     </tbody>
 </table>
+
+
+<?php delete_post(); ?>
