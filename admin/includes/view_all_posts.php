@@ -28,6 +28,7 @@
             $post_image = $row['post_image'];
             $post_tags = $row['post_tags'];
             $post_comment_count = $row['post_comment_count'];
+            $post_content = $row['post_content'];
             $post_date = $row['post_date'];
 
             echo "<tr>
@@ -39,8 +40,9 @@
                                         <td><img width='150' src='../images/{$post_image}'/></td>
                                         <td>$post_tags</td>
                                         <td>$post_comment_count</td>
+                                        <td>$post_content</td>
                                         <td>$post_date</td>
-                                        <td><a href='posts.php?source=edit_post'>Edit</a></td>
+                                        <td><a href='posts.php?source=edit_post&p_id=$post_id'>Edit</a></td>
                                         <td><a href='posts.php?delete=$post_id'>Delete</a></td>
                                     </tr>";
         }
