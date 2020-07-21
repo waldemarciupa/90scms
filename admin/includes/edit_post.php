@@ -19,6 +19,41 @@ while ($row = mysqli_fetch_assoc($select_post_by_id)) {
     $post_content = $row['post_content'];
     $post_date = $row['post_date'];
 }
+
+if (isset($_POST['update_post'])) {
+
+    $post_author = $_POST['post_author'];
+    $post_title = $_POST['post_title'];
+    $post_category_id = $_POST['post_category'];
+    $post_status = $_POST['post_status'];
+
+    $post_image = $_FILES['image']['name'];
+    $post_image_temp = $_FILES['image']['tmp_name'];
+
+    $post_content = $_POST['post_content'];
+    $post_tags = $_POST['post_tags'];
+
+    move_uploaded_file($post_image_temp, "../images/$post_image");
+
+    if (empty($post_image)) {
+
+        $query = "SELECT * FROM posts WHERE post_id = $post_id_to_edit ";
+
+        $select_image = mysqli_query($connection, $query);
+
+        while ($row = mysqli_fetch_assoc($select_image)) {
+            $post_image = $row['post_image'];
+        }
+    }
+
+    $query = "UPDATE posts SET post_title = '{$post_title}',
+    post_category_id = {$post_category_id}, post_date = now(), 
+    post_author = '{$post_author}', post_status = '{$post_status}', post_tags = '{$post_tags}', post_content = '{$post_content}', post_image = '{$post_image}' WHERE post_id = {$post_id_to_edit} ";
+
+    $update_post = mysqli_query($connection, $query);
+
+    confirm($update_post);
+}
 ?>
 
 <form action="" method="post" enctype="multipart/form-data">
@@ -63,6 +98,7 @@ while ($row = mysqli_fetch_assoc($select_post_by_id)) {
 
     <div class="form-group">
         <img width="100" src="../images/<?php echo $post_image; ?>" alt="">
+        <input type="file" name="image">
     </div>
 
     <div class="form-group">
@@ -77,7 +113,7 @@ while ($row = mysqli_fetch_assoc($select_post_by_id)) {
     </div>
 
     <div class="form-group">
-        <input type="submit" class="btn btn-primary" name="create_post" value="Publish Post">
+        <input type="submit" class="btn btn-primary" name="update_post" value="Update Post">
     </div>
 
 </form>
