@@ -26,19 +26,15 @@ if (isset($_POST['update_post'])) {
     $post_title = $_POST['post_title'];
     $post_category_id = $_POST['post_category'];
     $post_status = $_POST['post_status'];
-
     $post_image = $_FILES['image']['name'];
     $post_image_temp = $_FILES['image']['tmp_name'];
-
     $post_content = $_POST['post_content'];
     $post_tags = $_POST['post_tags'];
 
     move_uploaded_file($post_image_temp, "../images/$post_image");
 
     if (empty($post_image)) {
-
         $query = "SELECT * FROM posts WHERE post_id = $post_id_to_edit ";
-
         $select_image = mysqli_query($connection, $query);
 
         while ($row = mysqli_fetch_assoc($select_image)) {

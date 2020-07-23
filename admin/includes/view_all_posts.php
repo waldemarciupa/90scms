@@ -31,20 +31,30 @@
             $post_content = $row['post_content'];
             $post_date = $row['post_date'];
 
-            echo "<tr>
-                                        <td>$post_id</td>
-                                        <td>$post_author</td>
-                                        <td>$post_title</td>
-                                        <td>$post_category_id</td>
-                                        <td>$post_status</td>
-                                        <td><img width='150' src='../images/{$post_image}'/></td>
-                                        <td>$post_tags</td>
-                                        <td>$post_comment_count</td>
-                                        <td>$post_content</td>
-                                        <td>$post_date</td>
-                                        <td><a href='posts.php?source=edit_post&p_id=$post_id'>Edit</a></td>
-                                        <td><a href='posts.php?delete=$post_id'>Delete</a></td>
-                                    </tr>";
+            echo "<tr>";
+            echo "<td>$post_id</td>";
+            echo "<td>$post_author</td>";
+            echo "<td>$post_title</td>";
+
+            $query = "SELECT * FROM categories WHERE cat_id = {$post_category_id}";
+            $select_catagories_to_edit = mysqli_query($connection, $query);
+
+            while ($row = mysqli_fetch_assoc($select_catagories_to_edit)) {
+                $cat_id = $row['cat_id'];
+                $cat_title = $row['cat_title'];
+
+                echo "<td>{$cat_title}</td>";
+            }
+
+            echo "<td>$post_status</td>";
+            echo "<td><img width='150' src='../images/{$post_image}'/></td>";
+            echo "<td>$post_tags</td>";
+            echo "<td>$post_comment_count</td>";
+            echo "<td>$post_content</td>";
+            echo "<td>$post_date</td>";
+            echo "<td><a href='posts.php?source=edit_post&p_id=$post_id'>Edit</a></td>";
+            echo "<td><a href='posts.php?delete=$post_id'>Delete</a></td>";
+            echo "</tr>";
         }
 
         ?>
