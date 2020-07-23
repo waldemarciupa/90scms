@@ -14,7 +14,10 @@
 
             <?php
 
-            $query = "SELECT * FROM posts";
+            if (isset($_GET['category']));
+            $post_category_id = $_GET['category'];
+
+            $query = "SELECT * FROM posts WHERE post_category_id = $post_category_id ";
 
             $select_all_posts_query = mysqli_query($connection, $query);
 
@@ -25,7 +28,6 @@
                 $post_date = $row['post_date'];
                 $post_image = $row['post_image'];
                 $post_content = substr($row['post_content'], 0, 220) . "...";
-
             ?>
 
                 <h1 class="page-header">
