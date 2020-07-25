@@ -10,7 +10,6 @@
             <th>Date</th>
             <th>Approve</th>
             <th>Unapprove</th>
-            <th>Edit</th>
             <th>Delete</th>
         </tr>
     </thead>
@@ -47,26 +46,12 @@
                 echo "<td><a href='../post.php?p_id=$post_id'>$post_title</a></td>";
             }
 
-
             echo "<td>$comment_date</td>";
 
-            echo "<td><a href='posts.php?source=edit_post&p_id=$comment_id'>Approve</a></td>";
-            echo "<td><a href='posts.php?source=edit_post&p_id=$comment_id'>Unapprove</a></td>";
-            echo "<td><a href='posts.php?source=edit_post&p_id=$comment_id'>Edit</a></td>";
-            echo "<td><a href='posts.php?delete=$comment_id'>Delete</a></td>";
+            echo "<td><a href='comment.php?source=edit_post&p_id=$comment_id'>Approve</a></td>";
+            echo "<td><a href='comment.php?source=edit_post&p_id=$comment_id'>Unapprove</a></td>";
+            echo "<td><a href='comments.php?delete=$comment_id'>Delete</a></td>";
             echo "</tr>";
-
-            // $query = "SELECT * FROM categories WHERE cat_id = {$post_category_id}";
-            // $select_catagories_to_edit = mysqli_query($connection, $query);
-
-            // while ($row = mysqli_fetch_assoc($select_catagories_to_edit)) {
-            //     $cat_id = $row['cat_id'];
-            //     $cat_title = $row['cat_title'];
-
-            //     echo "<td>{$cat_title}</td>";
-            // }
-
-
         }
 
         ?>
@@ -75,4 +60,13 @@
 </table>
 
 
-<?php delete_post(); ?>
+<?php
+
+if (isset($_GET['delete'])) {
+    $the_comment_id = $_GET['delete'];
+    $query = "DELETE FROM comments WHERE comment_id = {$the_comment_id} ";
+    $delete_query = mysqli_query($connection, $query);
+    header("Location: comments.php");
+}
+
+?>
