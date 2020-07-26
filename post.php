@@ -80,6 +80,14 @@
                 $create_comment_query = mysqli_query($connection, $query);
 
                 confirm($create_comment_query);
+
+                $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 ";
+
+                $query .= "WHERE post_id = $the_post_id ";
+
+                $update_comment_count = mysqli_query($connection, $query);
+
+                confirm($update_comment_count);
             }
 
             ?>
@@ -121,8 +129,6 @@
                 $comment_date = $row['comment_date'];
                 $comment_content = $row['comment_content'];
                 $comment_author = $row['comment_author'];
-
-
             ?>
 
                 <!-- Comment -->
@@ -137,8 +143,6 @@
                         <?php echo $comment_content ?>
                     </div>
                 </div>
-
-
 
             <?php } ?>
 
