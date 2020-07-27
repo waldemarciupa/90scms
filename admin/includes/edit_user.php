@@ -18,21 +18,23 @@ if (isset($_GET['edit_user'])) {
     }
 }
 
-// if (isset($_POST['edit_user'])) {
+if (isset($_POST['edit_user'])) {
 
-//     $user_firstname = $_POST['user_firstname'];
-//     $user_lastname = $_POST['user_lastname'];
-//     $user_role = $_POST['user_role'];
-//     $username = $_POST['username'];
-//     $user_email = $_POST['user_email'];
-//     $user_password = $_POST['user_password'];
+    $user_firstname = $_POST['user_firstname'];
+    $user_lastname = $_POST['user_lastname'];
+    $user_role = $_POST['user_role'];
+    $username = $_POST['username'];
+    $user_email = $_POST['user_email'];
+    $user_password = $_POST['user_password'];
 
-//     $query = "INSERT INTO users(user_firstname, user_lastname, user_role, username, user_email, user_password) VALUES('{$user_firstname}', '{$user_lastname}', '{$user_role}', '{$username}', '{$user_email}', '{$user_password}' ) ";
+    $query = "UPDATE users SET user_firstname = '{$user_firstname}',
+    user_lastname = '{$user_lastname}', 
+    user_role = '{$user_role}', username = '{$username}', user_email = '{$user_email}', user_password = '{$user_password}' WHERE user_id = {$the_user_id} ";
 
-//     $create_user_query = mysqli_query($connection, $query);
+    $edit_user_query = mysqli_query($connection, $query);
 
-//     confirm($create_user_query);
-// }
+    confirm($edit_user_query);
+}
 
 ?>
 
@@ -48,11 +50,19 @@ if (isset($_GET['edit_user'])) {
         <input type="text" value="<?php echo $user_lastname; ?>" class="form-control" name="user_lastname" />
     </div>
 
+
     <div class="form-group">
         <select name="user_role" id="">
-            <option value="subscriber">Select option</option>
-            <option value="admin">Admin</option>
-            <option value="subsriber">Subscriber</option>
+            <option value="subscriber"><?php echo $user_role; ?></option>
+            <?php
+
+            if ($user_role == 'admin') {
+                echo "<option value='subsriber'>subscriber</option>";
+            } else {
+                echo "<option value='admin'>admin</option>";
+            }
+
+            ?>
         </select>
     </div>
 
