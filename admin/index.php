@@ -150,6 +150,23 @@
                 </div>
             </div>
         </div>
+
+        <?php
+
+        $query = "SELECT * FROM posts WHERE post_status = 'draft'";
+        $select_all_draft_post = mysqli_query($connection, $query);
+        $posts_draft_count = mysqli_num_rows($select_all_draft_post);
+
+        $query = "SELECT * FROM comments WHERE comment_status = 'unapproved'";
+        $unapproved_comments_query = mysqli_query($connection, $query);
+        $unapproved_comment_count = mysqli_num_rows($unapproved_comments_query);
+
+        $query = "SELECT * FROM users WHERE user_role = 'subscriber'";
+        $select_all_subscribers = mysqli_query($connection, $query);
+        $subscriber_count = mysqli_num_rows($select_all_subscribers);
+
+        ?>
+
         <div style="display: flex; justify-content: center; align-items: center;" class="row">
             <script type="text/javascript">
                 google.charts.load('current', {
@@ -163,10 +180,10 @@
 
                         <?php
 
-                        $element_text = ['Active Posts', 'Comments', 'Users', 'Categories'];
-                        $element_count = [$posts_counts, $comments_counts, $users_counts, $categories_counts];
+                        $element_text = ['Active Posts', 'Draft Posts', 'Comments', 'Pending Comments', 'Users', 'Subscribers', 'Categories'];
+                        $element_count = [$posts_counts, $posts_draft_count, $comments_counts, $unapproved_comment_count, $users_counts, $subscriber_count, $categories_counts];
 
-                        for ($i = 0; $i < 4; $i++) {
+                        for ($i = 0; $i < 7; $i++) {
                             echo "['{$element_text[$i]}'" . "," . "{$element_count[$i]}],";
                         }
 
@@ -187,14 +204,10 @@
                 }
             </script>
 
-            <div id="columnchart_material" style="width: 90%;  height: auto;"></div>
+            <div id="columnchart_material" style="width: 90%;  height: 300px;"></div>
         </div>
         <!-- /.row -->
     </div>
     <!-- /#page-wrapper -->
-
-
-
-
 
     <?php include "includes/admin_footer.php"; ?>
