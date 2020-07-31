@@ -72,7 +72,14 @@ if (isset($_POST['create_post'])) {
 
     <div class="form-group">
         <label for="post_content">Post Content</label>
-        <textarea class="form-control" name="post_content" id="" cols="30" rows="10"></textarea>
+        <textarea class="form-control" name="post_content" id="editor1" rows="10" cols="80">
+                This is my textarea to be replaced with CKEditor 4.
+            </textarea>
+        <script>
+            // Replace the <textarea id="editor1"> with a CKEditor 4
+            // instance, using default configuration.
+            CKEDITOR.replace('editor1');
+        </script>
     </div>
 
     <div class="form-group">
