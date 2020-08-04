@@ -13,13 +13,13 @@ if (isset($_POST['checkBoxArray'])) {
                 break;
             case 'draft':
                 $query = "UPDATE posts SET post_status = '{$bulk_options}' WHERE post_id = $post_id ";
-                $update_to_publish_status = mysqli_query($connection, $query);
-                confirm($update_to_publish_status);
+                $update_to_draft_status = mysqli_query($connection, $query);
+                confirm($update_to_draft_status);
                 break;
             case 'delete':
                 $query = "DELETE FROM posts WHERE post_id = $post_id ";
-                $update_to_publish_status = mysqli_query($connection, $query);
-                confirm($update_to_publish_status);
+                $update_to_delete_status = mysqli_query($connection, $query);
+                confirm($update_to_delete_status);
                 break;
         }
     }
