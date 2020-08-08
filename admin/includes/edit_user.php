@@ -61,7 +61,7 @@ if (isset($_POST['edit_user'])) {
 
     <div class="form-group">
         <select name="user_role" id="">
-            <option value="subscriber"><?php echo $user_role; ?></option>
+            <option value="<?php echo $user_role; ?>"><?php echo $user_role; ?></option>
             <?php
 
             if ($user_role == 'admin') {
@@ -96,7 +96,7 @@ if (isset($_POST['edit_user'])) {
     </div>
 
     <div class="form-group">
-        <input type="submit" class="btn btn-primary" name="edit_user" value="Edit User">
+        <input type="submit" class="btn btn-primary" name="edit_user" value="Update User">
     </div>
 
 </form>
