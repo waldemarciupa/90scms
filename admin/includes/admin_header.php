@@ -41,6 +41,8 @@ if (!isset($_SESSION['user_role'])) {
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <link href="css/styles.css" rel="stylesheet">
+
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
