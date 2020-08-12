@@ -27,13 +27,19 @@ if (isset($_POST['edit_user'])) {
     $user_email = $_POST['user_email'];
     $user_password = $_POST['user_password'];
 
-    $query = "SELECT randSalt FROM users";
-    $select_randsalt_query = mysqli_query($connection, $query);
-    confirm($select_randsalt_query);
+    if (!empty($user_password)) {
+        $query_password = "SELECT user_password FROM users WHERE user_id = $the_user_id";
+        $get_user_query = mysqli_query($connection, $query_password);
+        confirm($get_user_query);
 
-    $row = mysqli_fetch_array($select_randsalt_query);
-    $salt = $row['randSalt'];
-    $hashed_password = crypt($user_password, $salt);
+        $row = mysqli_fetch_array($get_user_query);
+
+        $db_user_password = $row['user_password'];
+    }
+
+    if ($db_user_password != $user_password) {
+        $hashed_password = password_hash($user_password, PASSWORD_BCRYPT, ['cost' => 12]);
+    }
 
     $query = "UPDATE users SET user_firstname = '{$user_firstname}',
     user_lastname = '{$user_lastname}', 
