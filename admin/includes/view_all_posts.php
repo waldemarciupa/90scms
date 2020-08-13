@@ -91,7 +91,7 @@ if (isset($_POST['checkBoxArray'])) {
 
             <?php
 
-            $query = "SELECT * FROM posts ORDER BY post_id DESC";
+            $query = "SELECT * FROM posts ORDER BY post_id DESC ";
             $select_posts = mysqli_query($connection, $query);
 
             while ($row = mysqli_fetch_assoc($select_posts)) {
@@ -114,14 +114,15 @@ if (isset($_POST['checkBoxArray'])) {
                 echo "<td>$post_author</td>";
                 echo "<td>$post_title</td>";
 
-                $query = "SELECT * FROM categories WHERE cat_id = {$post_category_id}";
-                $select_catagories_to_edit = mysqli_query($connection, $query);
+                $query = "SELECT * FROM categories WHERE cat_id = {$post_category_id} ";
+                $select_categories_id = mysqli_query($connection, $query);
 
-                while ($row = mysqli_fetch_assoc($select_catagories_to_edit)) {
+                while ($row = mysqli_fetch_assoc($select_categories_id)) {
                     $cat_id = $row['cat_id'];
                     $cat_title = $row['cat_title'];
 
-                    echo "<td>{$cat_title}</td>";
+
+                    echo "<td>$cat_title</td>";
                 }
 
                 echo "<td>$post_status</td>";
@@ -137,11 +138,10 @@ if (isset($_POST['checkBoxArray'])) {
 
 
                 echo "<td><a href='post_comments.php?id=$post_id'>$count_comments</a></td>";
-
-                echo "<td>$post_date</td>";
-                echo "<td><a href='../post.php?p_id=$post_id'>View Post</a></td>";
-                echo "<td><a href='posts.php?source=edit_post&p_id=$post_id'>Edit</a></td>";
-                echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete?'); \" href='posts.php?delete=$post_id'>Delete</a></td>";
+                echo "<td>$post_date </td>";
+                echo "<td><a class='btn btn-primary' href='../post.php?p_id={$post_id}'>View Post</a></td>";
+                echo "<td><a class='btn btn-info' href='posts.php?source=edit_post&p_id={$post_id}'>Edit</a></td>";
+                echo "<td><a class='btn btn-danger' onClick=\"javascript: return confirm('Are you sure you want to delete?'); \" href='posts.php?delete=$post_id'>Delete</a></td>";
                 echo "</tr>";
             }
 
