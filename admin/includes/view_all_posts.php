@@ -113,9 +113,9 @@ if (isset($_POST['checkBoxArray'])) {
             <?php
                 echo "<td>$post_id</td>";
 
-                if (isset($post_author) || !empty($post_author)) {
+                if (!empty($post_author)) {
                     echo "<td>$post_author</td>";
-                } elseif (isset($post_user) || !empty($post_us)) {
+                } elseif (!empty($post_user)) {
                     echo "<td>$post_user</td>";
                 }
 
@@ -139,9 +139,19 @@ if (isset($_POST['checkBoxArray'])) {
                 $query = "SELECT * FROM comments WHERE comment_post_id = $post_id";
                 $send_comment_query = mysqli_query($connection, $query);
 
+
                 $row = mysqli_fetch_array($send_comment_query);
-                $comment_id = $row['comment_id'];
+
+                // $comment_id = $row['comment_id'];
+
+                // if (mysqli_num_rows($send_comment_query) == 0) {
+                //     $count_comments = 0;
+                // } else {
+                //     $count_comments = mysqli_num_rows($send_comment_query);
+                // }
+
                 $count_comments = mysqli_num_rows($send_comment_query);
+
 
 
                 echo "<td><a href='post_comments.php?id=$post_id'>$count_comments</a></td>";
