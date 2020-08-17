@@ -96,6 +96,12 @@ if (isset($_POST['update_post'])) {
 
             <?php
 
+            echo "<option value='{$post_user}'>$post_user</option>";
+
+            ?>
+
+            <?php
+
             $query = "SELECT * FROM users";
             $select_users = mysqli_query($connection, $query);
             confirm($select_users);
@@ -104,7 +110,7 @@ if (isset($_POST['update_post'])) {
                 $user_id = $row['user_id'];
                 $username = $row['username'];
 
-                echo "<option value='{$username}'>{$username}</option>";
+                echo "<option value='{$username}'>$username</option>";
             }
             ?>
 

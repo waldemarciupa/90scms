@@ -21,7 +21,7 @@
                 $the_post_author = $_GET['author'];
             }
 
-            $query = "SELECT * FROM posts WHERE post_author = '{$the_post_author}' ";
+            $query = "SELECT * FROM posts WHERE post_user = '{$the_post_author}' ";
 
             $selectAllPosts = mysqli_query($connection, $query);
 
@@ -29,7 +29,7 @@
 
             while ($row = mysqli_fetch_assoc($selectAllPosts)) {
                 $post_title = $row['post_title'];
-                $post_author = $row['post_author'];
+                $post_author = $row['post_user'];
                 $post_date = $row['post_date'];
                 $post_image = $row['post_image'];
                 $post_content = $row['post_content'];
