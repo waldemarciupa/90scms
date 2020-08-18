@@ -27,56 +27,61 @@
                 $page_1 = ($page * $per_page) - $per_page;
             }
 
-            $post_query_count = "SELECT * FROM posts";
+            $post_query_count = "SELECT * FROM posts WHERE post_status = 'published'";
             $find_count = mysqli_query($connection, $post_query_count);
             $count = mysqli_num_rows($find_count);
 
             $count = ceil($count / $per_page);
 
-            $query = "SELECT * FROM posts LIMIT $page_1, $per_page";
-            $select_all_posts_query = mysqli_query($connection, $query);
+            if ($count < 1) {
+                echo "<h1 class='text-center'>No posts available</h1>";
+            } else {
 
-            while ($row = mysqli_fetch_assoc($select_all_posts_query)) {
-                $post_id = $row['post_id'];
-                $post_title = $row['post_title'];
-                $post_user = $row['post_user'];
-                $post_date = $row['post_date'];
-                $post_image = $row['post_image'];
-                $post_content = substr($row['post_content'], 0, 220);
-                $post_status = $row['post_status'];
+                $query = "SELECT * FROM posts LIMIT $page_1, $per_page";
+                $select_all_posts_query = mysqli_query($connection, $query);
 
-                if ($post_status == 'published') {
+                while ($row = mysqli_fetch_assoc($select_all_posts_query)) {
+                    $post_id = $row['post_id'];
+                    $post_title = $row['post_title'];
+                    $post_user = $row['post_user'];
+                    $post_date = $row['post_date'];
+                    $post_image = $row['post_image'];
+                    $post_content = substr($row['post_content'], 0, 220);
+                    $post_status = $row['post_status'];
+
+                    if ($post_status == 'published') {
 
             ?>
 
-                    <h1 class="page-header">
-                        Page Heading
-                        <small>Secondary Text</small>
-                    </h1>
+                        <h1 class="page-header">
+                            Page Heading
+                            <small>Secondary Text</small>
+                        </h1>
 
-                    <!-- First Blog Post -->
-                    <h2>
-                        <a href="post.php?p_id=<?php echo $post_id; ?>"><?php echo $post_title ?></a>
-                    </h2>
+                        <!-- First Blog Post -->
+                        <h2>
+                            <a href="post.php?p_id=<?php echo $post_id; ?>"><?php echo $post_title ?></a>
+                        </h2>
 
-                    <p class="lead">
-                        by <a href="author_post.php?author=<?php echo $post_user ?>&p_id=<?php echo $post_id ?>"><?php echo $post_user ?></a>
-                    </p>
+                        <p class="lead">
+                            by <a href="author_post.php?author=<?php echo $post_user ?>&p_id=<?php echo $post_id ?>"><?php echo $post_user ?></a>
+                        </p>
 
-                    <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date ?></p>
-                    <hr>
+                        <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date ?></p>
+                        <hr>
 
-                    <a href="post.php?p_id=<?php echo $post_id; ?>">
-                        <img class="img-responsive" src="images/<?php echo $post_image; ?>" alt="">
-                    </a>
+                        <a href="post.php?p_id=<?php echo $post_id; ?>">
+                            <img class="img-responsive" src="images/<?php echo $post_image; ?>" alt="">
+                        </a>
 
-                    <hr>
-                    <p><?php echo $post_content ?></p>
-                    <a class="btn btn-primary" href="post.php?p_id=<?php echo $post_id; ?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                        <hr>
+                        <p><?php echo $post_content ?></p>
+                        <a class="btn btn-primary" href="post.php?p_id=<?php echo $post_id; ?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
-                    <hr>
+                        <hr>
 
             <?php }
+                }
             } ?>
 
         </div>
