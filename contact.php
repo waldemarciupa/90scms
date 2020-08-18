@@ -7,7 +7,7 @@ if (isset($_POST['submit'])) {
     $to       = "waldemarciupa90@gmail.com";
     $subject  = $_POST['subject'];
     $body     = $_POST['body'];
-    $header   = $_POST['email'];
+    $header   = "From: " . $_POST['email'];
 
     // use wordwrap() if lines are longer than 70 characters
     $msg = wordwrap($body, 70);
