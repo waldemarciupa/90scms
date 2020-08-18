@@ -18,21 +18,29 @@
 
     <!-- Login -->
     <div class="well">
-        <h4>Login</h4>
-        <form action="includes/login.php" method="post">
-            <div class="form-group">
-                <input placeholder="Username" name="username" type="text" class="form-control">
-            </div>
-            <div class="input-group">
-                <input placeholder="Password" name="password" type="password" class="form-control">
-                <span class="input-group-btn">
-                    <button class="btn btn-primary" name="login" type="submit">
-                        Submit
-                    </button>
-                </span>
-            </div>
-        </form> <!-- search form -->
-        <!-- /.input-group -->
+
+        <?php if (isset($_SESSION['user_role'])) : ?>
+            <h4>Logged in as <?php echo $_SESSION['username']; ?></h4>
+            <a href="includes/logout.php" class="btn btn-primary">Logout</a>
+        <?php else : ?>
+            <h4>Login</h4>
+            <form action="includes/login.php" method="post">
+                <div class="form-group">
+                    <input placeholder="Username" name="username" type="text" class="form-control">
+                </div>
+                <div class="input-group">
+                    <input placeholder="Password" name="password" type="password" class="form-control">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" name="login" type="submit">
+                            Submit
+                        </button>
+                    </span>
+                </div>
+            </form> <!-- search form -->
+            <!-- /.input-group -->
+        <?php endif; ?>
+
+
     </div>
 
     <!-- Blog Categories Well -->
