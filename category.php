@@ -18,19 +18,11 @@
 
             <?php
 
-
             if (isset($_GET['category'])) {
 
                 $post_category_id  = $_GET['category'];
 
-
-
-
                 if (isset($_SESSION['username']) && is_admin($_SESSION['username'])) {
-
-
-
-
 
                     $stmt1 = mysqli_prepare($connection, "SELECT post_id, post_title, post_author, post_date, post_image, post_content FROM posts WHERE post_category_id = ?");
                 } else {
@@ -39,7 +31,6 @@
 
                     $published = 'published';
                 }
-
 
                 if (isset($stmt1)) {
 
@@ -52,7 +43,6 @@
                     $stmt = $stmt1;
                 } else {
 
-
                     mysqli_stmt_bind_param($stmt2, "is", $post_category_id, $published);
 
                     mysqli_stmt_execute($stmt2);
@@ -62,29 +52,11 @@
                     $stmt = $stmt2;
                 }
 
-
-
-                // if(mysqli_stmt_num_rows($stmt) < 1) {
-
-
-
-                // echo "<h1 class='text-center'>No Post available for this category</h1>";
-
-
-
-                // } else 
-
-
-
-
                 while (mysqli_stmt_fetch($stmt)) {
-
-
             ?>
 
                     <h1 class="page-header">
                         <?php  ?>
-
                     </h1>
 
                     <!-- First Blog Post -->
@@ -106,35 +78,18 @@
 
             <?php }
             } else {
-
-
-
-
                 header("Location: index.php");
             } ?>
 
-
-
-
-
-
-
-
         </div>
-
-
 
         <!-- Blog Sidebar Widgets Column -->
 
-
         <?php include "includes/sidebar.php"; ?>
-
 
     </div>
     <!-- /.row -->
 
     <hr>
-
-
 
     <?php include "includes/footer.php"; ?>
