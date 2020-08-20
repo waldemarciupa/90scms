@@ -121,3 +121,17 @@ function delete_post()
         header("Location: posts.php");
     }
 }
+
+function recordCount($table)
+{
+    global $connection;
+
+    $query = "SELECT * FROM " . $table;
+    $select_all_post = mysqli_query($connection, $query);
+
+    $result = mysqli_num_rows($select_all_post);
+
+    confirm($result);
+
+    return $result;
+}
